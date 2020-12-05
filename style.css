@@ -1,0 +1,9 @@
+body {
+	background-color: rgb(141, 190, 158);
+}
+
+.result-box {
+	background-color: cadetblue;
+	height: 100px;
+	width: 200px;
+}
