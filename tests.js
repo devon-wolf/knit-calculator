@@ -55,3 +55,9 @@ calcButton.addEventListener('click', () => {
 });
 */
 // works
+
+/*
+let rawValues = [startCount, divisions, decrease];
+	console.log(mapValueByID(rawValues));
+*/
+//works
