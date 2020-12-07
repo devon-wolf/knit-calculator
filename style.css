@@ -10,7 +10,10 @@ body, html {
 }
 
 body {
-	background-image: url("https://cdn.pixabay.com/photo/2017/10/26/21/33/blue-2892571_1280.jpg");
+	background-image: url("https://images.pexels.com/photos/1487701/pexels-photo-1487701.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: rgba(161, 194, 196, .9);
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	display: flex;
 	justify-content: center;
