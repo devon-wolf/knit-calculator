@@ -10,10 +10,9 @@ body, html {
 }
 
 body {
-	background-image: url("https://images.pexels.com/photos/1487701/pexels-photo-1487701.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+	background-image: linear-gradient(to bottom right, rgba(161, 194, 196, .9), rgba(200, 230, 187, 0.6), rgba(255, 248, 220, 0.8));
 	background-repeat: no-repeat;
 	background-position: center;
-	background-color: rgba(161, 194, 196, .9);
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	display: flex;
 	justify-content: center;
@@ -22,9 +21,10 @@ body {
 }
 
 .background-box {
-	background: rgba(200, 230, 187, 0.6);
+	background: rgba(200, 230, 187, 0.95);
 	padding: 60px;
 	border-radius: 25px;
+	border: dotted 1.5px rgba(161, 194, 196, .9);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -32,9 +32,10 @@ body {
 }
 
 .container {
-	background: rgba(255, 248, 220, 0.8);
+	background: rgba(255, 248, 220, 0.9);
 	padding: 40px;
 	border-radius: 25px;
+	border: dotted 1px rgba(161, 194, 196, .9);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -42,12 +43,12 @@ body {
 }
 
 .result-box {
-	background-color: rgba(161, 194, 196, .9);
+	background-color: rgba(161, 194, 196, .8);
 	height: 50px;
 	width: 100px;
 	margin: 5px;
 	border-radius: 15px;
-	border: dotted 1px black;
+	border: dotted 1px rgba(200, 230, 187, 0.9);
 	font-weight: bold;
 	display: flex;
 	justify-content: center;
@@ -55,7 +56,7 @@ body {
 }
 
 input {
-	border: dotted 1px black;
+	border: dotted 1px rgba(200, 230, 187, 0.9);
 	margin: 5px;
 	padding: 5px;
 	display: flex;
@@ -68,6 +69,7 @@ input {
 
 button {
 	margin: 10px;
+	border: dotted 1px rgba(200, 230, 187, 0.9);
 	display: flex;
 	justify-content: center;
 	align-items: center;

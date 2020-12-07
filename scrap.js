@@ -25,3 +25,6 @@
 	else {
 		// distribute stray stitch and then go back up to the else if probably
 	}*/
+
+	// old background image
+	/* url("https://images.pexels.com/photos/1487701/pexels-photo-1487701.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"); */

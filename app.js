@@ -20,7 +20,6 @@ calcButton.addEventListener('click', () => {
 	// placeholder to show the object is getting the right info
 	console.log(stitchSpecs);
 
-	// test: 100 stitches, 4 desired sections should return this array: [25, 25, 25, 25] - PASSED
 	console.log(planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']));
 
 	// placeholder math to prove the math is working
