@@ -8,7 +8,8 @@ import {
 	toNumber,
 	mapValueByID,
 	planSections,
-	distributeExtras
+	splitInHalf,
+	distributeStitches
 } from "./utils.js";
 
 
@@ -25,7 +26,10 @@ calcButton.addEventListener('click', () => {
 
 	const sectionArray = planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']);
 
-	console.log(distributeExtras(stitchSpecs['stitch-count'], stitchSpecs['desired-sections'], sectionArray));
+	console.log(splitInHalf(sectionArray));
+
+	console.log(distributeStitches(stitchSpecs['stitch-count'], stitchSpecs['desired-sections'], splitInHalf(sectionArray)));
+
 
 	// placeholder math to prove the math is working
 	results.textContent = numberBox.reduce((a, b) => a + b);

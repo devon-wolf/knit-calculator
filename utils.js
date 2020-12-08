@@ -33,44 +33,60 @@ export function planSections(stitchCount, desiredSections) {
 };
 
 // IN PROGRESS
-export function distributeExtras(stitchCount, desiredSections, sectionArray) {
-	const remainder = stitchCount % desiredSections;
-	const firstHalf = sectionArray.slice(Math.floor(sectionArray.length / 2));
-	const secondHalf = sectionArray.slice(Math.floor(sectionArray.length / 2), sectionArray.length);
-	/* test: 106 stitches, 8 desired sections should log:
-		2
-		[13, 13, 13, 13, 13, 13, 13, 13]
-		[13, 13, 13, 13]
-		[13, 13, 13, 13]
-		[13, 13, 13, 13, 13, 13, 13, 13]
-		PASSED
-	*/
+export function splitInHalf(sectionArray) {
+	const firstHalf = sectionArray.slice(0, Math.floor(sectionArray.length / 2));
+	console.log(firstHalf);
+	const secondHalf = sectionArray.slice(Math.ceil(sectionArray.length / 2), sectionArray.length);
+	console.log(secondHalf);
+	if ([...firstHalf, ...secondHalf].length === sectionArray.length) {
+		return [firstHalf, secondHalf];
+	}
+	else {
+		return [firstHalf, sectionArray[Math.floor(sectionArray.length / 2)], secondHalf];
+	};
+};
 
+export function distributeStitches(stitchCount, desiredSections, array) {
+	let remainder = stitchCount % desiredSections;
 	let newSections = [];
+
+	let firstHalf = array[0];
+	let secondHalf = array[array.length - 1];
+	
+	// IN PROGRESS - needs to split repeatedly and add 1 stitch to the first element of each new split until the remainder is used up
 	if (remainder % 2 === 0) {
 		for (let i = 0; i < remainder; i += 2) {
 			firstHalf[0] = firstHalf[0] + 1;
 			secondHalf[0] = secondHalf[0] + 1;
-
-			// IN PROGRESS
-			/* let firstHalfSplit = firstHalf.slice(Math.floor(firstHalf.length / 2, firstHalf.length));
-			let secondHalfSplit = secondHalf.slice(Math.floor(secondHalf.length / 2, secondHalf.length)); */
+			};
+		if (array.length % 2 === 0) {
+			newSections = [...firstHalf, ...secondHalf];
+		}
+		else {
+			newSections = [...firstHalf, array[Math.floor(array.length / 2)], ...secondHalf];
 		};
-		newSections = [...firstHalf, ...secondHalf];
-		/*
-		test: 106 stitches, 8 desired sections should return:
-		[14, 13, 13, 13, 14, 13, 13, 13]
-		PASSED
-		*/
+		// all working as expected for the moment, but the distribution needs to iterate instead of all going on index 0
 	}
 	else {
 		console.log('I do not yet know how to handle odd numbers of extra stitches, so they have been tacked on to the end as a new section.');
-		newSections = [...sectionArray, remainder];
+		newSections = [...array, remainder];
 		/*
 		test: 107 stitches, 8 desired sections should return:
 		[13, 13, 13, 13, 13, 13, 13, 13, 3]
 		PASSED
 		*/
-	};
+	};	
+		// IN PROGRESS
+		/*  let firstHalfSplit = firstHalf.slice(Math.floor(firstHalf.length / 2, firstHalf.length));
+			let secondHalfSplit = secondHalf.slice(Math.floor(secondHalf.length / 2, secondHalf.length));
+		
+		 */
+		/*
+		test: 106 stitches, 8 desired sections should return:
+		[14, 13, 13, 13, 14, 13, 13, 13]
+		PASSED
+		*/
+	
 	return newSections;
 };
+
