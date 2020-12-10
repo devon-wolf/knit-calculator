@@ -5,18 +5,22 @@ const calcButton = document.getElementById('calc-button');
 const results = document.getElementById('results');
 
 import {
-	toNumber,
 	mapValueByID,
 	planSections,
-	splitInHalf,
 	splitAndAddRemainder,
 } from "./utils.js";
 
 calcButton.addEventListener('click', () => {	
 	const rawValues = [startCount, divisions, decrease];
 	const stitchSpecs = mapValueByID(rawValues);
-	const numberBox = rawValues.map(i => toNumber(i));
 
-	// placeholder math to prove the math is working
-	results.textContent = numberBox.reduce((a, b) => a + b);
+	let sectionArray = planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']);
+
+	while (sectionArray.reduce((a, b) => a + b) !== stitchSpecs['stitch-count']) {
+		sectionArray = splitAndAddRemainder(sectionArray, stitchSpecs['stitch-count'] % stitchSpecs['desired-sections']);
+	};
+
+	results.textContent = sectionArray;
 });
+
+// works as expected! prints the correctly-distributed array in the results box
