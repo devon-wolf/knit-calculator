@@ -19,6 +19,7 @@ export function planSections(stitchCount, desiredSections) {
 		};
 		return sections;
 		// test: 100 stitches, 4 desired sections should return this array: [25, 25, 25, 25] - PASSED
+		// this is a thing I can use to test - if the reduced array equals the total stitch count, no further action needs to be taken
 	}
 	else {
 		const remainder = stitchCount % desiredSections;
@@ -32,33 +33,18 @@ export function planSections(stitchCount, desiredSections) {
 	};
 };
 
-// IN PROGRESS
-export function splitInHalf(sectionArray) {
-	const firstHalf = sectionArray.slice(0, Math.floor(sectionArray.length / 2));
-	// console.log(firstHalf);
-	const secondHalf = sectionArray.slice(Math.ceil(sectionArray.length / 2), sectionArray.length);
-	// console.log(secondHalf);
-	if ([...firstHalf, ...secondHalf].length === sectionArray.length) {
+export function splitInHalf(array) {
+	const firstHalf = array.slice(0, Math.floor(array.length / 2));
+	const secondHalf = array.slice(Math.ceil(array.length / 2), array.length);
+	
+	if ([...firstHalf, ...secondHalf].length === array.length) {
 		return [firstHalf, secondHalf];
 	}
 	else {
-		return [firstHalf, sectionArray[Math.floor(sectionArray.length / 2)], secondHalf];
+		return [firstHalf, array[Math.floor(array.length / 2)], secondHalf];
 	};
 };
-
-export function splitHistory(array) {
-	let arrayMemory = [];
-	let splitArray = splitInHalf(array);
-	let firstHalf = splitArray[0]; // array
-	let secondHalf = splitArray[splitArray.length - 1]; // array
-	if ([...firstHalf, ...secondHalf].length === array.length) {
-		arrayMemory.push(firstHalf, secondHalf); // 2 arrays pushed to array
-	}
-	else {
-		arrayMemory.push(firstHalf, array[Math.floor(array.length / 2)], secondHalf); // array, single item, and array pushed to array
-	};
-	return arrayMemory; // an array filled with arrays and possible one non-array item
-};
+// worth noting that this always returns an array of either 2 or 3 items (this phenomenon is used in rememberMiddleStitch and splitAndAddRemainder)
 
 export function addOnetoFirstSection(array) {
 	array[0] = array[0] + 1;
@@ -72,32 +58,38 @@ export function rememberMiddleStitch(array) {
 	};
 };
 
+export function spreadOutArrays(array) {
+	let newArray = [];
+	for (let item of array) {
+		try {
+			newArray.push(...item);
+		}
+		catch {
+			newArray.push(item);
+		};
+	};
+	return newArray;
+};
+
 export function splitAndAddRemainder(array, remainder) {
-	let newArray = ['I have no data'];
-	
 	let splitArray = splitInHalf(array);
 	let firstHalf = splitArray[0];
 	let secondHalf = splitArray[splitArray.length - 1];
 	let i = remainder;
-	let workingArray = [];
-
-	console.log('STARTING DATA:\nfirst half:', firstHalf, 'second half:', secondHalf, 'stitches in i:', i);
+	// need to make sure remainder is coming from a logical place
+	// let workingArray = [];
 	
 	addOnetoFirstSection(firstHalf);
 	i -= 1;
 	addOnetoFirstSection(secondHalf);
 	i -= 1;
 
-	console.log('After first additions:\nfirst half:', firstHalf, 'second half:', secondHalf, 'stitches in i:', i);
-
-	if (splitArray.length > 2) {
+/* 	if (splitArray.length > 2) {
 		workingArray.push(firstHalf, rememberMiddleStitch(splitArray), secondHalf);
 	}
 	else {
 		workingArray.push(firstHalf, secondHalf);
-	};
-
-	console.log('Working array after first push:', workingArray);
+	}; */
 	
 	let messArray = [];
 	
@@ -136,7 +128,6 @@ export function splitAndAddRemainder(array, remainder) {
 		i -= 2;
 	};
 
-	console.log('Mess array after while loop:', messArray);
 	/* all works as expected with input of:
 		39 stitches, 7 sections
 			messArray returns [[6], 5, [6], 5, [6], 5, [6]]
@@ -145,52 +136,12 @@ export function splitAndAddRemainder(array, remainder) {
 		
 		Need to make sure this function does NOT get used when there is no remainder, because it automatically adds two stitches right now without ever checking to see if there are actually extra stitches - can add an if statement at the start as a failsafe, though this is only intended to be used within functions that themselves do check for the remainder
 	*/
-
-	/* if (array.length % 2 === 0) {
-		workingArray.push(firstHalf, secondHalf);
-	}
-	else {
-		workingArray.push(firstHalf, array[Math.floor(array.length / 2)], secondHalf);
-	}; */
-/* 
-	while (i > 0) {
-		splitAndAddRemainder(workingArray); // this is a problem bc it's an array with arrays inside, where the initial value was not
-	}; */
-	
-	return newArray;
-};
-
-
-
-export function distributeStitches(stitchCount, desiredSections, array) {
-	const remainder = stitchCount % desiredSections;
-	let splitArray = splitInHalf(array);
-	let newSections = [];
-	let arrayMemory = [];
-	
-	if (remainder % 2 === 0) {
-		let i = 0;
-		do {
-			i += 2;
-			let firstHalf = splitArray[0];
-			let secondHalf = splitArray[splitArray.length - 1];
-			firstHalf[0] = firstHalf[0] + 1;
-			secondHalf[0] = secondHalf[0] + 1;
-		} while (i < remainder);
-	}
-	else {
-		console.log('I do not yet know how to handle odd numbers of extra stitches, so they have been tacked on to the end as a new section.');
-			newSections = [...array, remainder];
-			/*
-			test: 107 stitches, 8 desired sections should return:
-			[13, 13, 13, 13, 13, 13, 13, 13, 3]
-			PASSED
-			*/
-	};
 	
 	// quick line to confirm the right number of stitches is present in the new array
-	console.log(`Total stitches in newSections: ${newSections.reduce((a, b) => a + b)}`);
-		
-	return newSections;
-};
+	
+	let newArray = spreadOutArrays(messArray);
+	console.log(`Total stitches in newArray: ${newArray.reduce((a, b) => a + b)}`);
 
+	return spreadOutArrays(messArray);
+};
+// this works!! the returned array has the right number of sections and the remainder spread out evenly among them

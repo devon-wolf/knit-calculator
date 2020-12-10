@@ -94,3 +94,56 @@
 		
 		return newSections;
 */
+
+/* if (array.length % 2 === 0) {
+		workingArray.push(firstHalf, secondHalf);
+	}
+	else {
+		workingArray.push(firstHalf, array[Math.floor(array.length / 2)], secondHalf);
+	}; */
+/* 
+	while (i > 0) {
+		splitAndAddRemainder(workingArray); // this is a problem bc it's an array with arrays inside, where the initial value was not
+	}; */
+
+/* 
+export function distributeStitches(stitchCount, desiredSections, array) {
+	const remainder = stitchCount % desiredSections;
+	let splitArray = splitInHalf(array);
+	let newSections = [];
+	let arrayMemory = [];
+		
+	if (remainder % 2 === 0) {
+		let i = 0;
+		do {
+			i += 2;
+			let firstHalf = splitArray[0];
+			let secondHalf = splitArray[splitArray.length - 1];
+			firstHalf[0] = firstHalf[0] + 1;
+			secondHalf[0] = secondHalf[0] + 1;
+			} while (i < remainder);
+	}
+	else {
+		console.log('I do not yet know how to handle odd numbers of extra stitches, so they have been tacked on to the end as a new section.');
+		newSections = [...array, remainder];
+		};
+		
+	// quick line to confirm the right number of stitches is present in the new array
+	console.log(`Total stitches in newSections: ${newSections.reduce((a, b) => a + b)}`);
+			
+	return newSections;
+	}; */
+
+/* export function splitHistory(array) {
+	let arrayMemory = [];
+	let splitArray = splitInHalf(array);
+	let firstHalf = splitArray[0]; // array
+	let secondHalf = splitArray[splitArray.length - 1]; // array
+	if ([...firstHalf, ...secondHalf].length === array.length) {
+		arrayMemory.push(firstHalf, secondHalf); // 2 arrays pushed to array
+	}
+	else {
+		arrayMemory.push(firstHalf, array[Math.floor(array.length / 2)], secondHalf); // array, single item, and array pushed to array
+	};
+	return arrayMemory; // an array filled with arrays and possible one non-array item
+}; */

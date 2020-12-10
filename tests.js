@@ -61,3 +61,14 @@ let rawValues = [startCount, divisions, decrease];
 	console.log(mapValueByID(rawValues));
 */
 //works
+
+// placeholders to test functions - ALL WORK
+/* console.log(`stitchSpecs`, stitchSpecs);
+
+console.log(`planSections`, planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']));
+
+const sectionArray = planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']);
+
+console.log(`splitInHalf`, splitInHalf(sectionArray));
+
+console.log('splitAndAddRemainder', splitAndAddRemainder(sectionArray, stitchSpecs['stitch-count'] % stitchSpecs['desired-sections'])); */
