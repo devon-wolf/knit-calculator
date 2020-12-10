@@ -9,7 +9,8 @@ import {
 	mapValueByID,
 	planSections,
 	splitInHalf,
-	distributeStitches
+	distributeStitches,
+	splitAndAddRemainder
 } from "./utils.js";
 
 
@@ -19,16 +20,20 @@ calcButton.addEventListener('click', () => {
 	const stitchSpecs = mapValueByID(rawValues);
 	const numberBox = rawValues.map(i => toNumber(i));
 
-	// placeholder to show the object is getting the right info
-	console.log(stitchSpecs);
+	// placeholders to test functions
+	console.log(`stitchSpecs`, stitchSpecs);
 
-	console.log(planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']));
+	console.log(`planSections`, planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']));
 
 	const sectionArray = planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']);
 
-	console.log(splitInHalf(sectionArray));
+	console.log(`splitInHalf`, splitInHalf(sectionArray));
 
-	console.log(distributeStitches(stitchSpecs['stitch-count'], stitchSpecs['desired-sections'], splitInHalf(sectionArray)));
+	/* console.log(`splitRepeatedly`, splitRepeatedly(sectionArray)); */
+
+	console.log('splitAndAddRemainder:', splitAndAddRemainder(sectionArray, stitchSpecs['stitch-count'] % stitchSpecs['desired-sections']));
+
+	/* console.log(distributeStitches(stitchSpecs['stitch-count'], stitchSpecs['desired-sections'], sectionArray)); */
 
 
 	// placeholder math to prove the math is working
