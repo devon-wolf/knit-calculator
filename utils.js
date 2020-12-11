@@ -71,26 +71,49 @@ export function spreadOutArrays(array) {
 	return newArray;
 };
 
+export function distributeToArray(array, value) {
+	let i = value;
+	while (i > 0) {
+		addOnetoFirstSection(array);
+		i -= 1;
+	};
+	return array;
+};
+
+export function identifyEnds(array) {
+	const sections = {
+		start: array[0],
+		end: array[array.length - 1]
+	};
+	return sections;
+};
+
+export function addRemainderOneSide(array, remainder) {
+	let sections = identifyEnds(array);
+	let i = remainder;
+	let workingArray = [];
+
+	distributeToArray(sections.start, 1);
+	i -= 1;
+	console.log(sections.start);
+	distributeToArray(sections.end, 1);
+	i -= 1;
+	console.log(sections.end);
+	// IN PROGRESS, just mimicing the below function right now, figuring out how to simplify...
+};
+
 export function splitAndAddRemainder(array, remainder) {
 	let splitArray = splitInHalf(array);
 	let firstHalf = splitArray[0];
 	let secondHalf = splitArray[splitArray.length - 1];
 	let i = remainder;
 	// need to make sure remainder is coming from a logical place
-	// let workingArray = [];
 	
 	addOnetoFirstSection(firstHalf);
 	i -= 1;
 	addOnetoFirstSection(secondHalf);
 	i -= 1;
 
-/* 	if (splitArray.length > 2) {
-		workingArray.push(firstHalf, rememberMiddleStitch(splitArray), secondHalf);
-	}
-	else {
-		workingArray.push(firstHalf, secondHalf);
-	}; */
-	
 	let messArray = [];
 	
 	while (i > 0) {

@@ -147,3 +147,12 @@ export function distributeStitches(stitchCount, desiredSections, array) {
 	};
 	return arrayMemory; // an array filled with arrays and possible one non-array item
 }; */
+
+/* 	if (splitArray.length > 2) {
+		workingArray.push(firstHalf, rememberMiddleStitch(splitArray), secondHalf);
+	}
+	else {
+		workingArray.push(firstHalf, secondHalf);
+	}; */
+
+	
