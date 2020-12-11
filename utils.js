@@ -88,18 +88,53 @@ export function identifyEnds(array) {
 	return sections;
 };
 
+export function distrubuteOverHalf(array, remainder) {
+	let finishedHalf = [];
+	let i = remainder;
+	let nextArray = [];
+	
+	while (i > remainder / 2) {
+		distributeToArray(array, 1);
+		let sections;
+		// I need to fix this to get dropped middle items to push into the finishedHalf, can probably be done by adding a middle item key into the identify ends function and accounting for that in this one
+		// one consideration to keep in mind with what I did here - the iteration will be wonky with odd numbered sections with a remainder close to the number of total sections because of the loss of the middle item (example: 7 sections with a remainder of 6)
+		// I've been considering adding the middle item to identifyEnds, that might be a way to help this - there are some arrays where the VERY middle item needs to get a stitch (the fourth item in the above example)
+		// right now it will return the correct values for half the array, but the total number of stitches will be a stitch short (in the middle) - this can probably be handled in the broader function that will run this one over both the start and end sections, then check to see if the reduced array contains the right number of stitches - if not it can look for the middle item
+		// otherwise this is going well though
+		if (array.length > 1) {
+			nextArray = splitInHalf(array);
+			sections = identifyEnds(nextArray);
+			finishedHalf.push(...sections.start);
+		}
+		else if (array.length === 1) {
+			finishedHalf.push(...array);
+		}
+		else {
+			console.log('Something went wrong; length of array is less than 1.')
+		};
+		i -= 1;
+		distributeOverHalf(sections.end, remainder);
+
+	};
+	return finishedHalf;
+};
+
+
+// probably going to nuke this one/restart and make it the base for the refactored splitAndAddRemainder fnc
 export function addRemainderOneSide(array, remainder) {
 	let sections = identifyEnds(array);
 	let i = remainder;
 	let workingArray = [];
-
+// IN PROGRESS, just mimicing the below function right now, figuring out how to simplify...
 	distributeToArray(sections.start, 1);
 	i -= 1;
 	console.log(sections.start);
 	distributeToArray(sections.end, 1);
 	i -= 1;
 	console.log(sections.end);
-	// IN PROGRESS, just mimicing the below function right now, figuring out how to simplify...
+
+	let nextArray = splitInHalf(array);
+
 };
 
 export function splitAndAddRemainder(array, remainder) {
