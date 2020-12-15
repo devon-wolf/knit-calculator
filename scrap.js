@@ -155,4 +155,118 @@ export function distributeStitches(stitchCount, desiredSections, array) {
 		workingArray.push(firstHalf, secondHalf);
 	}; */
 
+	// I need to fix this to get dropped middle items to push into the finishedHalf, can probably be done by adding a middle item key into the identify ends function and accounting for that in this one
+	// one consideration to keep in mind with what I did here - the iteration will be wonky with odd numbered sections with a remainder close to the number of total sections because of the loss of the middle item (example: 7 sections with a remainder of 6)
+	// I've been considering adding the middle item to identifyEnds, that might be a way to help this - there are some arrays where the VERY middle item needs to get a stitch (the fourth item in the above example)
+	// right now it will return the correct values for half the array, but the total number of stitches will be a stitch short (in the middle) - this can probably be handled in the broader function that will run this one over both the start and end sections, then check to see if the reduced array contains the right number of stitches - if not it can look for the middle item
+	// otherwise this is going well though
+
+	/* while (i > remainder / 2) {
+		distributeToArray(array, 1);
+		let sections;
+		
+		if (array.length > 1) {
+			nextArray = splitInHalf(array);
+			sections = identifyEnds(nextArray);
+			
+			finishedHalf.push(...sections.start);
+			if (sections.hasOwnProperty('middle') && Array.isArray(sections.middle) === false) {
+				finishedHalf.push(sections.middle);
+			};
+		}
+		else if (array.length === 1) {
+			finishedHalf.push(...array);
+		}
+		else {
+			console.log('Something went wrong; length of array is less than 1.')
+		};
+		i -= 1;
+		distributeOverHalf(sections.end, remainder);
+
+	};
+	return finishedHalf; */
+
+	// console.log('I\'m attached!');
+// works
+
+/*
+calcButton.addEventListener('click', () => {
+	console.log('I can hear you.');
+});
+*/
+// works
+
+/*
+calcButton.addEventListener('click', () => {
+	console.log(startCount.value, divisions.value, decrease.value);
+});
+*/
+// works
+
+/*
+calcButton.addEventListener('click', () => {
+	const stitches = Number(startCount.value);
+	const sections = Number(divisions.value);
+	const decreaseBy = Number(decrease.value);
 	
+	console.log(stitches + sections + decreaseBy);
+});
+*/
+// works
+
+/*
+calcButton.addEventListener('click', () => {
+	const stitches = Number(startCount.value);
+	const sections = Number(divisions.value);
+	const decreaseBy = Number(decrease.value);
+	
+	console.log(stitches + sections + decreaseBy);
+	results.textContent = stitches + sections + decreaseBy;
+});
+*/
+// works
+
+/*
+calcButton.addEventListener('click', () => {
+	console.log(toNumber(startCount) + toNumber(divisions) + toNumber(decrease));
+	results.textContent = toNumber(startCount) + toNumber(divisions) + toNumber(decrease);
+});
+*/
+// works
+
+/*
+calcButton.addEventListener('click', () => {
+	let rawValues = [startCount, divisions, decrease];
+	let numberBox = rawValues.map(i => toNumber(i));
+	console.log(numberBox);
+	results.textContent = numberBox.reduce((a, b) => a + b);
+});
+*/
+// works
+
+/*
+let rawValues = [startCount, divisions, decrease];
+	console.log(mapValueByID(rawValues));
+*/
+//works
+
+// placeholders to test functions - ALL WORK
+/* console.log(`stitchSpecs`, stitchSpecs);
+
+console.log(`planSections`, planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']));
+
+const sectionArray = planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']);
+
+console.log(`splitInHalf`, splitInHalf(sectionArray));
+
+console.log('splitAndAddRemainder', splitAndAddRemainder(sectionArray, stitchSpecs['stitch-count'] % stitchSpecs['desired-sections'])); */
+
+/* console.log('Test values:', populateTests([[43, 2], 9, [0, 0 , 0, 1], {house: 'pink'}, 0, -1]));
+
+console.log('Expected results:', populateResults(['Tuesday', 17, {name: 'Bert'}, [16, 16, 17, 16, 16, 17], 4900, 'pie'])); */
+
+/* let testArgs = populateTests([1, [2, 3, 4], 3, 4, 5, 6, 7]);
+let returnValues = populateResults([2, [4, 6, 8], 4, 6, 8, 10, 12, 14]);
+// sticking an array in messes with the iteration
+console.log (testFunction(a => a * 2, testArgs, returnValues)); */
+
