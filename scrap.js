@@ -270,3 +270,16 @@ let returnValues = populateResults([2, [4, 6, 8], 4, 6, 8, 10, 12, 14]);
 // sticking an array in messes with the iteration
 console.log (testFunction(a => a * 2, testArgs, returnValues)); */
 
+/* while (sectionArray.reduce((a, b) => a + b) !== stitchSpecs['stitch-count']) {
+		sectionArray = splitAndAddRemainder(sectionArray, stitchSpecs['stitch-count'] % stitchSpecs['desired-sections']);
+	};
+
+	results.textContent = sectionArray;*/
+	
+	// PROBLEM - infinite recursion with input of 51 stitches, 9 sections
+
+	/* console.log('distributeOverHalf:', distributeOverHalf(sectionArray, stitchSpecs['stitch-count'] % stitchSpecs['desired-sections'])); */
+
+// works as expected! prints the correctly-distributed array in the results box
+// NEVERMIND, see note above and on splitAndAddRemainder function
+
