@@ -4,7 +4,9 @@ import {
 	planSections,
 	splitInHalf,
 	splitAndAddRemainder,
-	distributeOverHalf
+	distributeOverHalf,
+	addOnetoFirstSection,
+	rememberMiddleStitch
 } from "./utils.js";
 
 // VARIABLES FROM HTML DOCUMENT
@@ -85,8 +87,20 @@ export function splitInHalfTest(array, expectedResult) {
 	// returns an array
 	// THINGS THAT NEED TO BE TRUE
 	// actualResult.length === 2 || actualResult.length === 3
+	// first item and last item are equal lengths
 	// Array.isArray on the first and last item must be true
 	// for now just testing against a static expected result
+	
+	console.log(actualResult[0].length, actualResult[actualResult.length - 1].length)
+	if (actualResult.length !== expectedResult.length) {
+		splitInHalfResults['fullLength'] = 'FAILED';
+		return splitInHalfResults;
+	};
+	if (actualResult[0].length !== actualResult[actualResult.length - 1].length) {
+		splitInHalfResults['itemLength'] = 'FAILED';
+		return splitInHalfResults;
+	};
+	
 	let i = 0;
 	while (i <= actualResult.length - 1) {
 		if (actualResult[i] !== expectedResult[i]) {
@@ -115,3 +129,35 @@ export function splitInHalfTest(array, expectedResult) {
 };
 // seems to work correctly, seems to handle nested arrays correctly
 
+const addOneResults = {};
+export function addOneTest(array) {
+	const originalArray = [];
+	originalArray.push(...array);
+	// puts a copy of the original in a container that won't mutate
+
+	let actualResult = addOnetoFirstSection(array);
+	// returns an array, mutates original array
+	
+	// make sure first item increased by 1
+	if (actualResult[0] === originalArray[0] + 1) {
+		addOneResults['oneAdded'] = 'PASSED';
+	}
+	else {
+		addOneResults['oneAdded'] = 'FAILED';
+	};
+
+	// make sure the rest matches
+	let i = 1;
+	while (i <= originalArray.length - 1) {
+		if (actualResult[i] !== originalArray[i]) {
+			addOneResults['arrayMatch'] = 'FAILED';
+			break;
+		};
+		addOneResults['arrayMatch'] = 'PASSED';
+		i++;
+	};
+	return addOneResults;
+};
+// seems to work fine
+
+// This set of tests is not actually great...
