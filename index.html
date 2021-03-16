@@ -9,13 +9,30 @@
 </head>
 <body>
 	<div class="background-box">
-	<div class="container">
-		<div class="prompt"><input id="stitch-count" type="number"/></div>
-		<div class="prompt"><input id="desired-sections" type="number"/></div>
-		<div class="prompt"><input id="decrease-factor" type="number"/></div>
-		<div class="submit"><button id="calc-button">Calculate</button></div>
-		<div class="result-box" id="results"></div>
-	</div>
+		<div class="container">
+			
+			<label class="prompt">
+				<span>Total stitch count</span>
+				<input id="stitch-count" type="number"/>
+			</label>
+
+			<label class="prompt">
+				<span>Target number of sections</span>
+				<input id="desired-sections" type="number"/>
+			</label>
+
+			<label class="prompt">
+				<span>Required decreases per round</span>
+				<input id="decrease-factor" type="number"/>
+			</label>
+
+			<div class="submit">
+				<button id="calc-button">Calculate</button>
+			</div>
+
+			<div class="result-box" id="results"></div>
+
+		</div>
 	</div>
 
 	<script type="module" src="app.js"></script>
