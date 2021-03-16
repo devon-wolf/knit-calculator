@@ -1,8 +1,8 @@
-const startCount = document.getElementById('stitch-count');
-const divisions = document.getElementById('desired-sections');
-const decrease = document.getElementById('decrease-factor');
+const stitchesInput = document.getElementById('stitch-count');
+const sectionsInput = document.getElementById('desired-sections');
+const decreaseInput = document.getElementById('decrease-factor');
 const calcButton = document.getElementById('calc-button');
-const results = document.getElementById('results');
+const resultsDiv = document.getElementById('results');
 
 import {
 	mapValueByID,
@@ -11,14 +11,14 @@ import {
 } from "./utils.js";
 
 calcButton.addEventListener('click', () => {	
-	const rawValues = [startCount, divisions, decrease];
-	const stitchSpecs = mapValueByID(rawValues);
+	// const rawValues = [stitchesInput, sectionsInput, decreaseInput];
+	// const stitchSpecs = mapValueByID(rawValues);
 
-	// use planSections to make sectionArray
-	let sectionArray = planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']);
+	// // use planSections to make sectionArray
+	// let sectionArray = planSections(stitchSpecs['stitch-count'], stitchSpecs['desired-sections']);
 
-	while (sectionArray.reduce((a, b) => a + b) !== stitchSpecs['stitch-count']) {
-		sectionArray = splitAndAddRemainder(sectionArray, stitchSpecs['stitch-count'] % stitchSpecs['desired-sections']);
-	};
-	results.textContent = sectionArray;
+	// while (sectionArray.reduce((a, b) => a + b) !== stitchSpecs['stitch-count']) {
+	// 	sectionArray = splitAndAddRemainder(sectionArray, stitchSpecs['stitch-count'] % stitchSpecs['desired-sections']);
+	// };
+	// resultsDiv.textContent = sectionArray;
 });
