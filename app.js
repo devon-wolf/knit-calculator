@@ -19,7 +19,6 @@ calcButton.addEventListener('click', () => {
 		[stitchesInput, sectionsInput]);
 
 	const { stitches, sections } = calcObject;
-	const sectionArray = distributeRemainder(stitches, sections);
 	
 	resultsDiv.textContent = sectionArray;
 });
