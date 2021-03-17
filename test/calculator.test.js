@@ -1,12 +1,12 @@
 // import functions to test
 import {
-	makeSectionArray
+	makeSectionArray,
+	distributeRemainder
 } from '../utils/math-utils.js'
 
 const test = QUnit.test;
 
 // testing makeSectionArray, exercise in granular test-as-you-go strategy
-
 test('It should return an array', (expect) => {
     const expected = true;
     const actual = Array.isArray(makeSectionArray(187, 6));
@@ -53,4 +53,13 @@ test('The first set of numbers should be the quotient of the given arguments; th
 	const expected2 = true;
     const actual2 = testArray[10] ? testArray[10] === 204 % 10 : true;
 	expect.equal(actual2, expected2);
+});
+
+// testing distributeRemainder
+test('The total of all numbers in the array should equal the "stitches" argument', (expect) => {
+	const testArray = distributeRemainder(204, 10);
+    
+	const expected = 204;
+    const actual = testArray.reduce((a, b) => a + b);
+	expect.equal(actual, expected);
 });
